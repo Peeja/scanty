@@ -21,10 +21,6 @@ class Post < Sequel::Model
 		"/past/#{d.year}/#{d.month}/#{d.day}/#{slug}/"
 	end
 
-	def full_url
-		Blog.url_base.gsub(/\/$/, '') + url
-	end
-
 	def body_html
 		to_html(body)
 	end

@@ -18,7 +18,6 @@ configure do
 	Blog = OpenStruct.new(
 		:title => 'a scanty blog',
 		:author => 'John Doe',
-		:url_base => 'http://localhost:4567/',
 		:admin_identifier => 'http://openid.peeja.com/',
 		:disqus_shortname => nil
 	)

@@ -10,6 +10,5 @@ require 'post'
 require 'ostruct'
 Blog = OpenStruct.new(
 	:title => 'My blog',
-	:author => 'Anonymous Coward',
-	:url_base => 'http://blog.example.com/'
+	:author => 'Anonymous Coward'
 )
