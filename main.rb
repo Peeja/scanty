@@ -1,8 +1,15 @@
 require 'rubygems'
 require 'sinatra'
+require 'andand'
+
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/rack-openid'
+require 'rack/openid'
 
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/sequel'
 require 'sequel'
+
+use Rack::OpenID
+use Rack::Session::Cookie, :secret => rand.to_s
 
 configure do
 	Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://blog.db')
@@ -12,9 +19,7 @@ configure do
 		:title => 'a scanty blog',
 		:author => 'John Doe',
 		:url_base => 'http://localhost:4567/',
-		:admin_password => 'changeme',
-		:admin_cookie_key => 'scanty_admin',
-		:admin_cookie_value => '51d6d976913ace58',
+		:admin_identifier => 'http://openid.peeja.com/',
 		:disqus_shortname => nil
 	)
 end
@@ -31,11 +36,17 @@ require 'post'
 
 helpers do
 	def admin?
-		request.cookies[Blog.admin_cookie_key] == Blog.admin_cookie_value
+	  request.env["rack.session"]["admin"] ||=
+      (request.env["rack.openid.response"].andand.display_identifier == Blog.admin_identifier)
 	end
 
 	def auth
-		stop [ 401, 'Not authorized' ] unless admin?
+	  unless admin?
+      header 'WWW-Authenticate' => Rack::OpenID.build_header(
+        :identifier => Blog.admin_identifier
+      )
+    	stop [ 401, 'Not authorized' ]
+  	end
 	end
 end
 
@@ -83,15 +94,6 @@ get '/rss' do
 end
 
 ### Admin
-
-get '/auth' do
-	erb :auth
-end
-
-post '/auth' do
-	set_cookie(Blog.admin_cookie_key, Blog.admin_cookie_value) if params[:password] == Blog.admin_password
-	redirect '/'
-end
 
 get '/posts/new' do
 	auth
