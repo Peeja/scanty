@@ -5,7 +5,10 @@
 	<p class="meta"><%= post.created_at %></p>
 	<div class="entry">
 		<textarea name="body"><%= post.body %></textarea>
+    <div class="wmd-preview"></div>
 	</div>
 	<div class="edit"><input type="submit" value="Save" /></div>
 </div>
 </form>
+
+<script type="text/javascript" src="/wmd/wmd.js"></script>
