@@ -5,6 +5,7 @@ $LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/andand-1.3.1/lib'
 require 'andand'
 
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/rack-openid'
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/ruby-openid-2.1.2/lib'
 require 'rack/openid'
 
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/sequel'
