@@ -16,8 +16,8 @@ configure do
 
 	require 'ostruct'
 	Blog = OpenStruct.new(
-		:title => 'a scanty blog',
-		:author => 'John Doe',
+		:title => 'My Word!',
+		:author => 'Peter Jaros (peeja)',
 		:admin_identifier => 'http://openid.peeja.com/',
 		:disqus_shortname => nil
 	)
