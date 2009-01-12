@@ -33,7 +33,8 @@ a:hover {
 }
 
 hr {
-	display: none;
+	border-style: dashed;
+	width: 25%;
 }
 
 /* Logo */
