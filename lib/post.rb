@@ -3,6 +3,9 @@ require File.dirname(__FILE__) + '/../vendor/maruku/maruku'
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/syntax'
 require 'syntax/convertors/html'
 
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/coderay-0.8.273'
+require 'coderay'
+
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/htmlentities-4.0.0/lib'
 require 'htmlentities'
 
@@ -57,8 +60,7 @@ class Post < Sequel::Model
   def to_html(markdown)
     h = Maruku.new(markdown).to_html
     h.gsub(/<code>([^<]+)<\/code>/m) do
-      convertor = Syntax::Convertors::HTML.for_syntax "ruby"
-      highlighted = convertor.convert(HTMLEntities.new.decode($1))
+      highlighted = CodeRay.scan(HTMLEntities.new.decode($1), :ruby).html
       "<code>#{highlighted}</code>"
     end
   end
