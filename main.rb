@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'sinatra'
+
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/andand-1.3.1/lib'
 require 'andand'
 
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/rack-openid'
