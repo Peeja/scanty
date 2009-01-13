@@ -3,6 +3,9 @@ require File.dirname(__FILE__) + '/../vendor/maruku/maruku'
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/syntax'
 require 'syntax/convertors/html'
 
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/htmlentities-4.0.0/lib'
+require 'htmlentities'
+
 class Post < Sequel::Model
 	unless table_exists?
 		set_schema do
@@ -51,14 +54,14 @@ class Post < Sequel::Model
 
 	########
 
-	def to_html(markdown)
-		h = Maruku.new(markdown).to_html
-		h.gsub(/<code>([^<]+)<\/code>/m) do
-			convertor = Syntax::Convertors::HTML.for_syntax "ruby"
-			highlighted = convertor.convert($1)
-			"<code>#{highlighted}</code>"
-		end
-	end
+  def to_html(markdown)
+    h = Maruku.new(markdown).to_html
+    h.gsub(/<code>([^<]+)<\/code>/m) do
+      convertor = Syntax::Convertors::HTML.for_syntax "ruby"
+      highlighted = convertor.convert(HTMLEntities.new.decode($1))
+      "<code>#{highlighted}</code>"
+    end
+  end
 
 	def split_content(string)
 		parts = string.gsub(/\r/, '').split("\n\n")

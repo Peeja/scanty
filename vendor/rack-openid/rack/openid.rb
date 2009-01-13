@@ -1,7 +1,8 @@
 require 'rubygems'
 require 'rack'
 
-gem 'ruby-openid', '>=2.1.2'
+# Can't use #gem for vendored gems in this project.
+# gem 'ruby-openid', '>=2.1.2'
 require 'openid'
 require 'openid/consumer'
 require 'openid/extensions/sreg'
