@@ -42,7 +42,7 @@
 	<% end %>
 
 	<% if admin? %>
-		<div id="new_post"><a href="/posts/new"">New post</a></div>
+		<div id="new_post"><a href="/posts/new">New post</a></div>
 	<% end %>
 </div>
 
@@ -68,5 +68,16 @@
 	Content by <%= Blog.author %> | 
 	Design adapted from <a href="http://www.freecsstemplates.org/preview/replenish">Replenish</a>
 </div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3018059-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
 </body>
 </html>
