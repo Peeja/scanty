@@ -22,7 +22,7 @@ configure do
 		:title => 'My Word!',
 		:author => 'Peter Jaros (peeja)',
 		:admin_identifier => 'http://openid.peeja.com/',
-		:disqus_shortname => nil
+		:disqus_shortname => "peeja"
 	)
 end
 
