@@ -207,6 +207,12 @@ hr {
 	padding-bottom: 20px;
 }
 
+.postzoom .entry object {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .postzoom .edit {
 	text-align: right;
 	position: absolute;
