@@ -252,13 +252,17 @@ hr {
 
 /* Code blocks */
 
-pre {
+pre > code > pre {
 	font-family: Monaco, monospace;
 	color: #ccc;
 	background: #000;
 	border-left: 6px solid #222;
 	padding: 0.4em;
 	padding-left: 0.8em;
+}
+
+p > code > pre {
+	display: inline;
 }
 
 pre span.attribute { color: #009900; }
