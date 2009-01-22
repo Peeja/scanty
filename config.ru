@@ -1,1 +1,0 @@
-config/rackup.ru
