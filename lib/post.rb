@@ -58,7 +58,7 @@ class Post < Sequel::Model
     h = Maruku.new(markdown).to_html
     h.gsub(/<code>([^<]+)<\/code>/m) do
       convertor = Syntax::Convertors::HTML.for_syntax "ruby"
-      highlighted = convertor.convert(HTMLEntities.new.decode($1))
+      highlighted = convertor.convert(HTMLEntities.new.decode($1), false)
       "<code>#{highlighted}</code>"
     end
   end
