@@ -97,6 +97,11 @@ get '/rss' do
 	redirect '/feed', 301
 end
 
+get '/export.yml' do
+  YAML.dump Post.all
+end
+
+
 ### Admin
 
 get '/posts/new' do
