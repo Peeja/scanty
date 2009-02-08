@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/base'
+require File.dirname(__FILE__) + '/spec_helper'
 
 describe Post do
 	before do
@@ -17,7 +17,7 @@ describe Post do
 	end
 
 	it "syntax highlights code blocks" do
-		@post.to_html("<code>\none\ntwo</code>").should == "<code><pre>\n<span class=\"ident\">one</span>\n<span class=\"ident\">two</span></pre></code>"
+		@post.to_html("<code>\none\ntwo</code>").should == "<code>\n<span class=\"ident\">one</span>\n<span class=\"ident\">two</span></code>"
 	end
 
 	it "makes the tags into links to the tag search" do
