@@ -7,7 +7,6 @@ describe "Maruku with Tweetmark enabled" do
   end
   
   it "should interpret twitter blocks" do
-    pending
     markdown = <<-MARKDOWN
 +twitter
 does that cause global variable warming? (har har har)
