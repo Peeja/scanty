@@ -13,7 +13,6 @@ does that cause global variable warming? (har har har)
 =twitter
     MARKDOWN
     
-    p Maruku.new(markdown).to_html
     Maruku.new(markdown).to_html.should have_selector(".tweet") { |tweet|
       tweet.should have_selector(".tweet-body") { |body|
         body.inner_html.strip.should == 'does that cause global variable warming? (har har har)'
@@ -22,7 +21,6 @@ does that cause global variable warming? (har har har)
   end
   
   it "should linkify usernames" do
-    pending
     markdown = <<-MARKDOWN
 +twitter
 @peeja does that cause global variable warming? (har har har)
