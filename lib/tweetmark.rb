@@ -1,14 +1,25 @@
 module Tweetmark
+  Open  = /^\+twitter(?::(\d+))?/
+  Close = /^\=twitter/
+  
   class << self
     def enable
       MaRuKu::In::Markdown::register_block_extension(
-        :regexp  => /^\+twitter/,
+        :regexp  => Open,
         :handler => lambda do |doc, src, context|
-          src.shift_line
+          open_line = src.shift_line
+          status_id = Open.match(open_line)[1]
         
           raw_body = ""
-          while src.cur_line && !(src.cur_line =~ /^\=twitter/)
-            raw_body << src.shift_line
+          while src.cur_line && !(src.cur_line =~ Close)
+            case line = src.shift_line
+            when /^ @(\w+)/
+              from = $1
+            when /^ at (.*)$/
+              timestamp = Time.parse($1)
+            else
+              raw_body << line
+            end
           end
           src.shift_line
           
@@ -21,8 +32,17 @@ module Tweetmark
             end
           end
           
-          tweet_body = doc.md_div body, al(:class => "tweet-body")
-          tweet      = doc.md_div [tweet_body], al(:class => "tweet")
+          tweet_body = []
+          tweet_body << doc.md_div(body, al(:class => "tweet-body"))
+          
+          if timestamp and from and status_id
+            ordinal = { 1 => 'st', 2 => 'nd', 3 => 'rd' }[timestamp.day] || 'th'
+            timestamp_text = timestamp.strftime "%l:%M %p %b %e#{ordinal}, %Y"
+            meta = doc.md_im_link([timestamp_text.strip], "http://twitter.com/#{from}/statuses/#{status_id}", nil, al(:class => "tweet-permalink"))
+            tweet_body << doc.md_div([meta], al(:class => "tweet-meta"))
+          end
+          
+          tweet = doc.md_div tweet_body, al(:class => "tweet")
           context.push tweet
           true
         end
