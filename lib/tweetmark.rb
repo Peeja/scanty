@@ -13,8 +13,8 @@ module Tweetmark
           raw_body = ""
           while src.cur_line && !(src.cur_line =~ Close)
             case line = src.shift_line
-            when /^ @(\w+)/
-              from = $1
+            when /^ @(\w+) \((.*)\) \[(.*)\]/
+              from, from_real, avatar = $1, $2, $3
             when /^ at (.*)$/
               timestamp = Time.parse($1)
             else
@@ -33,13 +33,22 @@ module Tweetmark
           end
           
           tweet_body = []
+
           tweet_body << doc.md_div(body, al(:class => "tweet-body"))
           
           if timestamp and from and status_id
             ordinal = { 1 => 'st', 2 => 'nd', 3 => 'rd' }[timestamp.day] || 'th'
             timestamp_text = timestamp.strftime "%l:%M %p %b %e#{ordinal}, %Y"
-            meta = doc.md_im_link([timestamp_text.strip], "http://twitter.com/#{from}/statuses/#{status_id}", nil, al(:class => "tweet-permalink"))
-            tweet_body << doc.md_div([meta], al(:class => "tweet-meta"))
+            permalink = doc.md_im_link([timestamp_text.strip], "http://twitter.com/#{from}/statuses/#{status_id}", nil, al(:class => "tweet-permalink"))
+            tweet_body << doc.md_div([permalink], al(:class => "tweet-meta"))
+          end
+          
+          if from
+            tweet_body << doc.md_div([
+              doc.md_im_image([], avatar, nil, al(:class => "tweet-avatar")),
+              doc.md_im_link([from], "http://twitter.com/#{from}", nil, al(:class => "tweet-username")),
+              doc.md_div([from_real], al(:class => "tweet-realname"))
+            ], al(:class => "tweet-profile"))
           end
           
           tweet = doc.md_div tweet_body, al(:class => "tweet")

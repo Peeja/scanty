@@ -35,7 +35,6 @@ does that cause global variable warming? (har har har)
   end
 
   it "should add profile info" do
-    pending
     markdown = <<-MARKDOWN
 +twitter
 @peeja does that cause global variable warming? (har har har)
@@ -45,9 +44,9 @@ does that cause global variable warming? (har har har)
     
     Maruku.new(markdown).to_html.should have_selector(".tweet") { |tweet|
       tweet.should have_selector(".tweet-profile") { |profile|
-        profile.inner_html.should =~ %r|<img src="http://s3.amazonaws.com/twitter_production/profile_images/74240660/Photo_7b_normal.jpg" class="tweet-avatar">|
+        profile.inner_html.should =~ %r|<img class="tweet-avatar" src="http://s3.amazonaws.com/twitter_production/profile_images/74240660/Photo_7b_normal.jpg" alt="">|
         profile.inner_html.should =~ %r|<a href="http://twitter.com/gooberdlx" class="tweet-username">gooberdlx</a>|
-        profile.inner_html.should =~ %r|<span class="tweet-realname">Jake Good</span>|
+        profile.inner_html.should =~ %r|<div class="tweet-realname">Jake Good</div>|
       }
     }
   end
