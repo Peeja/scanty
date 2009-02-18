@@ -17,12 +17,18 @@ module Tweetmark
               from, from_real, avatar = $1, $2, $3
             when /^ at (.*)$/
               timestamp = Time.parse($1)
+            when /^ from <a href="(.*)">(.*)<\/a>$/
+              source_url, source = $1, $2
+            when /^ from (.*)$/
+              source = $1
             else
               raw_body << line
             end
           end
           src.shift_line
           
+          tweet_body = []
+
           # Linkify Twitter usernames
           body = raw_body.split(/\b/).inject([]) do |b, word|
             if b.last.is_a? String and b.last =~ /@$/
@@ -31,17 +37,24 @@ module Tweetmark
               b << word
             end
           end
-          
-          tweet_body = []
 
           tweet_body << doc.md_div(body, al(:class => "tweet-body"))
+          
+          tweet_meta = []
           
           if timestamp and from and status_id
             ordinal = { 1 => 'st', 2 => 'nd', 3 => 'rd' }[timestamp.day] || 'th'
             timestamp_text = timestamp.strftime "%l:%M %p %b %e#{ordinal}, %Y"
             permalink = doc.md_im_link([timestamp_text.strip], "http://twitter.com/#{from}/statuses/#{status_id}", nil, al(:class => "tweet-permalink"))
-            tweet_body << doc.md_div([permalink], al(:class => "tweet-meta"))
+            tweet_meta << permalink
           end
+          
+          if source
+            tweet_meta << "from "
+            tweet_meta << (source_url ? doc.md_im_link([source], source_url) : source)
+          end
+          
+          tweet_body << doc.md_div(tweet_meta, al(:class => "tweet-meta")) unless tweet_meta.empty?
           
           if from
             tweet_body << doc.md_div([

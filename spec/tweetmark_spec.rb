@@ -68,7 +68,21 @@ does that cause global variable warming? (har har har)
   end
   
   it "should add source information" do
-    pending
+    markdown = <<-MARKDOWN
++twitter
+@peeja does that cause global variable warming? (har har har)
+ from web
+=twitter
+    MARKDOWN
+    
+    Maruku.new(markdown).to_html.should have_selector(".tweet") { |tweet|
+      tweet.should have_selector(".tweet-meta") { |meta|
+        meta.inner_html.should =~ %r|from web|
+      }
+    }
+  end
+
+  it "should add linked source information" do
     markdown = <<-MARKDOWN
 +twitter
 @peeja does that cause global variable warming? (har har har)
