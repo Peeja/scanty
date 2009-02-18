@@ -98,7 +98,6 @@ does that cause global variable warming? (har har har)
   end
 
   it "should add an 'in reply to' link" do
-    pending
     markdown = <<-MARKDOWN
 +twitter
 @peeja does that cause global variable warming? (har har har)

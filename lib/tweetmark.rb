@@ -21,6 +21,8 @@ module Tweetmark
               source_url, source = $1, $2
             when /^ from (.*)$/
               source = $1
+            when /^ in reply to (.*):(\d+)$/
+              reply_to_name, reply_to_id = $1, $2
             else
               raw_body << line
             end
@@ -52,6 +54,10 @@ module Tweetmark
           if source
             tweet_meta << "from "
             tweet_meta << (source_url ? doc.md_im_link([source], source_url) : source)
+          end
+          
+          if reply_to_name and reply_to_id
+            tweet_meta << doc.md_im_link(["in reply to #{reply_to_name}"], "http://twitter.com/#{reply_to_name}/statuses/#{reply_to_id}")
           end
           
           tweet_body << doc.md_div(tweet_meta, al(:class => "tweet-meta")) unless tweet_meta.empty?
