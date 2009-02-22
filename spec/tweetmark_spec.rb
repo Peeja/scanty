@@ -1,5 +1,4 @@
 require File.dirname(__FILE__) + '/spec_helper'
-require 'tweetmark'
 
 describe "Maruku with Tweetmark enabled" do
   before(:each) do

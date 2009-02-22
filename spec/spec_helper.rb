@@ -9,6 +9,8 @@ Sequel.sqlite
 
 $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../lib')
 require 'post'
+require 'tweetmark'
+require 'tweet'
 
 require 'ostruct'
 Blog = OpenStruct.new(

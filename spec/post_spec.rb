@@ -15,6 +15,14 @@ describe Post do
 		@post.body = "* Bullet"
 		@post.body_html.should == "<ul>\n<li>Bullet</li>\n</ul>"
 	end
+	
+	it "expands tweets" do
+	  Tweet.stub!(:find).with(1234567).and_return(mock(Tweet, :to_tweetmark => "+twitter\ntwitter-block\n=twitter\n"))
+	  
+	  @post.body = "foo\n[tweet:1234567]\nbar"
+	  @post.save
+		@post.body.should == "foo\n+twitter\ntwitter-block\n=twitter\nbar"
+	end
 
 	it "syntax highlights code blocks" do
 		@post.to_html("<code>\none\ntwo</code>").should == "<code>\n<span class=\"ident\">one</span>\n<span class=\"ident\">two</span></code>"
