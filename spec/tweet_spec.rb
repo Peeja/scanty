@@ -41,10 +41,28 @@ describe Tweet do
   end
   
   describe "#to_tweetmark" do
-    it "includes the body of the Tweet"
-    it "includes the author's profile information"
-    it "includes the date of the Tweet"
-    it "includes the source of the Tweet"
-    it "includes a reference to the tweet replied to"
+    before do
+      tweet = Tweet.new do |t|
+        t.id                      = 1227845299
+        t.text                    = "@ChrisRicca I'm afraid it has."
+        t.user_screen_name        = "peeja"
+        t.user_name               = "Peter Jaros"
+        t.user_profile_image_url  = "http://s3.amazonaws.com/twitter_production/profile_images/78948024/blacked-out_normal.jpg"
+        t.created_at              = Time.parse("Thu Feb 19 19:47:14 +0000 2009")
+        t.source                  = "<a href=\"http://iconfactory.com/software/twitterrific\">twitterrific</a>"
+        t.in_reply_to_screen_name = "ChrisRicca"
+        t.in_reply_to_status_id   = 1227585280
+      end
+      
+      @tweetmark_lines = tweet.to_tweetmark.split("\n")
+    end
+    
+    it("opens the Tweetmark block with the id of the Tweet") { @tweetmark_lines.first.should == "+twitter:1227845299" }
+    it("includes the body of the Tweet")                     { @tweetmark_lines.should  include("@ChrisRicca I'm afraid it has.") }
+    it("includes the author's profile information")          { @tweetmark_lines.should  include("  @peeja (Peter Jaros) [http://s3.amazonaws.com/twitter_production/profile_images/78948024/blacked-out_normal.jpg]") }
+    it("includes the date of the Tweet")                     { @tweetmark_lines.should  include("  at Thu Feb 19 19:47:14 UTC 2009") }
+    it("includes the source of the Tweet")                   { @tweetmark_lines.should  include("  from <a href=\"http://iconfactory.com/software/twitterrific\">twitterrific</a>") }
+    it("includes a reference to the tweet replied to")       { @tweetmark_lines.should  include("  in reply to ChrisRicca:1227585280") }
+    it("closes the Tweetmark block")                         { @tweetmark_lines.last.should  == "=twitter" }
   end
 end
