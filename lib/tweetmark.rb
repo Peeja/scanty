@@ -52,7 +52,7 @@ module Tweetmark
           end
           
           if source
-            tweet_meta << "from "
+            tweet_meta << " from "
             tweet_meta << (source_url ? doc.md_im_link([source], source_url) : source)
           end
           

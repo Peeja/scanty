@@ -304,3 +304,74 @@ form[name=edit] textarea {
 	height: 25em;
 }
 
+
+/* Tweets */
+
+.tweet {
+	color: black;
+	background-color: #fff;
+	border: 10px solid #7d9cff;
+	padding: 10px 10px 0;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	width: 570px;
+	margin: 20px;
+}
+
+/* clearfix */
+.tweet:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.tweet a {
+	text-decoration: none;
+	color: #00f;
+}
+
+.tweet a:hover {
+	text-decoration: underline;
+}
+
+.tweet .tweet-body {
+	font-size: 1.8em;
+	margin-bottom: 10px;
+}
+
+.tweet .tweet-meta {
+	font-style: italic;
+	color: #999999;
+}
+
+.tweet .tweet-meta a {
+	color: #999999;
+}
+
+
+.tweet .tweet-profile {
+	border-top: thin solid #bebebe;
+	padding-top: 10px;
+	margin-top: 5px;
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+
+.tweet .tweet-profile .tweet-avatar {
+	float: left;
+	width: 48px;
+	height: 48px;
+	margin-right: 18px;
+	margin-bottom: 10px;
+}
+
+.tweet .tweet-profile .tweet-username {
+	display: block;
+	font-size: 27px;
+}
+
+.tweet .tweet-profile .tweet-realname {
+	display: block;
+	font-size: 14px;
+}
