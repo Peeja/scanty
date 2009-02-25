@@ -20,7 +20,7 @@ class Post < Sequel::Model
 	end
 	
 	before_save :lookup_tweets do
-	  body.gsub! /^\[tweet:(\d+)\]\n/ do
+	  body.gsub! /^\[twitter:(\d+)\]\r?\n/ do
 	    tweet_id = $1.to_i
 	    Tweet.find(tweet_id).to_tweetmark
 	  end

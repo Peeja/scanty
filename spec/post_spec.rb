@@ -19,7 +19,7 @@ describe Post do
 	it "expands tweets" do
 	  Tweet.stub!(:find).with(1234567).and_return(mock(Tweet, :to_tweetmark => "+twitter\ntwitter-block\n=twitter\n"))
 	  
-	  @post.body = "foo\n[tweet:1234567]\nbar"
+	  @post.body = "foo\n[twitter:1234567]\nbar"
 	  @post.save
 		@post.body.should == "foo\n+twitter\ntwitter-block\n=twitter\nbar"
 	end
