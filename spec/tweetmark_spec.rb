@@ -37,7 +37,7 @@ does that cause global variable warming? (har har har)
     markdown = <<-MARKDOWN
 +twitter
 @peeja does that cause global variable warming? (har har har)
- @gooberdlx (Jake Good) [http://s3.amazonaws.com/twitter_production/profile_images/74240660/Photo_7b_normal.jpg]
+  @gooberdlx (Jake Good) [http://s3.amazonaws.com/twitter_production/profile_images/74240660/Photo_7b_normal.jpg]
 =twitter
     MARKDOWN
     
@@ -54,8 +54,8 @@ does that cause global variable warming? (har har har)
     markdown = <<-MARKDOWN
 +twitter:1184488422
 @peeja does that cause global variable warming? (har har har)
- at Fri Feb 06 21:05:44 +0000 2009
- @gooberdlx (Jake Good) [http://s3.amazonaws.com/twitter_production/profile_images/74240660/Photo_7b_normal.jpg]
+  at Fri Feb 06 21:05:44 +0000 2009
+  @gooberdlx (Jake Good) [http://s3.amazonaws.com/twitter_production/profile_images/74240660/Photo_7b_normal.jpg]
 =twitter
     MARKDOWN
     
@@ -70,7 +70,7 @@ does that cause global variable warming? (har har har)
     markdown = <<-MARKDOWN
 +twitter
 @peeja does that cause global variable warming? (har har har)
- from web
+  from web
 =twitter
     MARKDOWN
     
@@ -85,7 +85,7 @@ does that cause global variable warming? (har har har)
     markdown = <<-MARKDOWN
 +twitter
 @peeja does that cause global variable warming? (har har har)
- from <a href="http://iconfactory.com/software/twitterrific">twitterrific</a>
+  from <a href="http://iconfactory.com/software/twitterrific">twitterrific</a>
 =twitter
     MARKDOWN
     
@@ -100,7 +100,7 @@ does that cause global variable warming? (har har har)
     markdown = <<-MARKDOWN
 +twitter
 @peeja does that cause global variable warming? (har har har)
- in reply to peeja:1184481088
+  in reply to peeja:1184481088
 =twitter
     MARKDOWN
     

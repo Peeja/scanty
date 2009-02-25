@@ -13,15 +13,15 @@ module Tweetmark
           raw_body = ""
           while src.cur_line && !(src.cur_line =~ Close)
             case line = src.shift_line
-            when /^ @(\w+) \((.*)\) \[(.*)\]/
+            when /^  @(\w+) \((.*)\) \[(.*)\]/
               from, from_real, avatar = $1, $2, $3
-            when /^ at (.*)$/
+            when /^  at (.*)$/
               timestamp = Time.parse($1)
-            when /^ from <a href="(.*)">(.*)<\/a>$/
+            when /^  from <a href="(.*)">(.*)<\/a>$/
               source_url, source = $1, $2
-            when /^ from (.*)$/
+            when /^  from (.*)$/
               source = $1
-            when /^ in reply to (.*):(\d+)$/
+            when /^  in reply to (.*):(\d+)$/
               reply_to_name, reply_to_id = $1, $2
             else
               raw_body << line
