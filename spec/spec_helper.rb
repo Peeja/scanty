@@ -18,6 +18,17 @@ Blog = OpenStruct.new(
 	:author => 'Anonymous Coward'
 ) unless defined? Blog
 
+
+class Object
+  def each_should(*args)
+    each {|item| item.should(*args)}
+  end
+  
+  def each_should_not(*args)
+    each {|item| item.should_not(*args)}
+  end
+end
+
 Spec::Runner.configure do |config|
   config.include Webrat::Matchers
   config.include Webrat::HaveTagMatcher

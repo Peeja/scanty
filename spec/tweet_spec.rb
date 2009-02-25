@@ -42,7 +42,7 @@ describe Tweet do
   
   describe "#to_tweetmark" do
     before do
-      tweet = Tweet.new do |t|
+      @tweet = Tweet.new do |t|
         t.id                      = 1227845299
         t.text                    = "@ChrisRicca I'm afraid it has."
         t.user_screen_name        = "peeja"
@@ -54,7 +54,7 @@ describe Tweet do
         t.in_reply_to_status_id   = 1227585280
       end
       
-      @tweetmark_lines = tweet.to_tweetmark.split("\n")
+      @tweetmark_lines = @tweet.to_tweetmark.split("\n")
     end
     
     it("opens the Tweetmark block with the id of the Tweet") { @tweetmark_lines.first.should == "+twitter:1227845299" }
@@ -64,5 +64,19 @@ describe Tweet do
     it("includes the source of the Tweet")                   { @tweetmark_lines.should  include("  from <a href=\"http://iconfactory.com/software/twitterrific\">twitterrific</a>") }
     it("includes a reference to the tweet replied to")       { @tweetmark_lines.should  include("  in reply to ChrisRicca:1227585280") }
     it("closes the Tweetmark block")                         { @tweetmark_lines.last.should  == "=twitter" }
+    
+    it "leaves out the id of the in-reply-to tweet when it's not available" do
+      @tweet.in_reply_to_status_id = nil
+      tweetmark_lines = @tweet.to_tweetmark.split("\n")
+      
+      tweetmark_lines.should include("  in reply to ChrisRicca")
+    end
+    
+    it "leaves out the in-reply-to line altogether when the Tweet is not a reply" do
+      @tweet.in_reply_to_screen_name = nil
+      tweetmark_lines = @tweet.to_tweetmark.split("\n")
+      
+      tweetmark_lines.each_should_not match(/^  in reply to /)
+    end
   end
 end

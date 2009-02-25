@@ -38,14 +38,19 @@ class Tweet
                 :in_reply_to_status_id
   
   def to_tweetmark
+    if in_reply_to_screen_name
+      in_reply_to  = "  in reply to #{in_reply_to_screen_name}"
+      in_reply_to += ":#{in_reply_to_status_id}" if in_reply_to_status_id
+      in_reply_to += "\n"
+    end
+    
     <<-TWEETMARK
 +twitter:#{id}
 #{text}
   @#{user_screen_name} (#{user_name}) [#{user_profile_image_url}]
   at #{created_at.utc}
   from #{source}
-  in reply to #{in_reply_to_screen_name}:#{in_reply_to_status_id}
-=twitter
+#{in_reply_to}=twitter
 TWEETMARK
   end
 end
