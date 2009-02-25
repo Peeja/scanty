@@ -35,6 +35,8 @@ end
 
 $LOAD_PATH.unshift(File.dirname(__FILE__) + '/lib')
 require 'post'
+require 'tweet'
+
 
 helpers do
 	def admin?
