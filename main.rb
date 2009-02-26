@@ -1,14 +1,14 @@
-require 'rubygems'
-require 'sinatra'
-
+$LOAD_PATH.unshift(File.dirname(__FILE__) + '/lib')
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/andand-1.3.1/lib'
-require 'andand'
-
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/rack-openid'
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/ruby-openid-2.1.2/lib'
-require 'rack/openid'
-
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/sequel'
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/httparty-0.3.1/lib'
+
+require 'rubygems'
+require 'sinatra'
+require 'andand'
+require 'rack/openid'
 require 'sequel'
 
 use Rack::OpenID
@@ -33,7 +33,6 @@ error do
 	"Application error"
 end
 
-$LOAD_PATH.unshift(File.dirname(__FILE__) + '/lib')
 require 'post'
 require 'tweet'
 
