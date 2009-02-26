@@ -1,13 +1,17 @@
+$LOAD_PATH.unshift(File.dirname(__FILE__) + '/../lib')
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/andand-1.3.1/lib'
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/rack-openid'
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/ruby-openid-2.1.2/lib'
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/sequel'
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/httparty-0.3.1/lib'
+
 require 'rubygems'
 require 'spec'
 require 'webrat'
-
-$LOAD_PATH.unshift(File.dirname(__FILE__) + '/../vendor/sequel')
 require 'sequel'
 
 Sequel.sqlite
 
-$LOAD_PATH.unshift(File.dirname(__FILE__) + '/../lib')
 require 'post'
 require 'tweetmark'
 require 'tweet'

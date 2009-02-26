@@ -106,7 +106,7 @@ does that cause global variable warming? (har har har)
     
     Maruku.new(markdown).to_html.should have_selector(".tweet") { |tweet|
       tweet.should have_selector(".tweet-meta") { |meta|
-        meta.inner_html.should =~ %r|<a href="http://twitter.com/peeja/statuses/1184481088">in reply to peeja</a>|
+        meta.inner_html.should =~ %r|<a href="http://twitter.com/peeja/statuses/1184481088"> in reply to peeja</a>|
       }
     }
   end
