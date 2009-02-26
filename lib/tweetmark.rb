@@ -57,7 +57,7 @@ module Tweetmark
           end
           
           if reply_to_name and reply_to_id
-            tweet_meta << doc.md_im_link(["in reply to #{reply_to_name}"], "http://twitter.com/#{reply_to_name}/statuses/#{reply_to_id}")
+            tweet_meta << doc.md_im_link([" in reply to #{reply_to_name}"], "http://twitter.com/#{reply_to_name}/statuses/#{reply_to_id}")
           end
           
           tweet_body << doc.md_div(tweet_meta, al(:class => "tweet-meta")) unless tweet_meta.empty?
